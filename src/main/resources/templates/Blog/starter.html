@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="cite">
+    <meta charset="UTF-8">
+    <title th:text="| testBlog - ${pageName}|">Blog_Starter</title>
+    <!-- 告诉浏览器响应屏幕宽度 -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- bootstrap样式表 -->
+    <link rel="stylesheet" href="/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- jQuery 3 -->
+    <script src="/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- Markdown书写样式 -->
+    <link rel="stylesheet" href="/Markdown/css/editormd.min.css"/>
+    <script src="/Markdown/editormd.min.js"></script>
+    <!-- Markdown显示样式 -->
+    <link rel="stylesheet" href="/Markdown/css/editormd.preview.min.css"/>
+    <script src="/Markdown/lib/marked.min.js"></script>
+    <script src="/Markdown/lib/prettify.min.js"></script>
+</head>
+<body style="padding-top: 70px;padding-bottom: 70px;">
+<!-- 顶部导航栏 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" th:fragment="header">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-header">
+                <b><a class="navbar-brand" href="/">testBlog</a></b>
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">开关</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="要搜索的内容...">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li th:unless="${session.testBlogUserInfo}"><a href="/userLogin">登录</a></li>
+                    <li th:if="${session.testBlogUserInfo}"><a href="/Blog/publish">发布</a></li>
+                    <li class="dropdown" th:if="${session.testBlogUserInfo}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="/AdminLTE/dist/img/user2-160x160.jpg" alt="User Image" class="userImage">
+                            [[${session.testBlogUserInfo.userName}]]<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="userInfoHeader">
+                                <img src="/AdminLTE/dist/img/user2-160x160.jpg" alt="User Image" class="userInfoImage">
+                                <p th:text="${session.testBlogUserInfo.userName}">用户名</p>
+                            </li>
+                            <li><a href="/Admin/main">后台管理</a></li>
+                            <li class="divider"></li>
+                            <li class="pull-right"><a href="/userLogout">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- 底部署名栏 -->
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" th:fragment="footer">
+    <p class="text-center">
+        Copyright &copy; 2016 Company. All rights reserved.
+    </p>
+</nav>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Blog.Dao.UserInfoMapper">
+
+    <!-- 查询所有用户信息 -->
+    <select id="userInfoFindAll" resultType="Blog.entity.UserInfo">
+        SELECT * FROM userInfo;
+    </select>
+
+    <!-- 查询指定用户信息 -->
+    <select id="userInfoFindOne" parameterType="INT" resultType="Blog.entity.UserInfo">
+		select * from userInfo where userID=#{占位符};
+	</select>
+
+    <!-- 查询指定用户信息 -->
+    <select id="userInfoFindName" parameterType="String" resultType="Blog.entity.UserInfo">
+		select * from userInfo where userName=#{占位符};
+	</select>
+
+    <!-- 新增用户信息 -->
+    <insert id="userInfoInsert" parameterType="Blog.entity.UserInfo">
+        insert into userInfo(userName,createTime,modifyTime) values(#{userName},#{createTime},#{modifyTime});
+    </insert>
+
+    <!-- 更新指定用户的信息 -->
+    <update id="userInfoUpdate" parameterType="Blog.entity.UserInfo">
+        update userInfo set userName=#{userName},userGender=#{userGender},userDesc=#{userDesc},modifyTime=#{modifyTime} where userID=#{userID};
+    </update>
+
+    <!-- 删除指定用户信息 -->
+    <delete id="userInfoDelete" parameterType="Integer">
+        delete from userInfo where userID=#{占位符};
+    </delete>
+
+</mapper>

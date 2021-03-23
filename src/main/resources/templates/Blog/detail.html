@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/Blog/starter :: cite}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="background1">
+<!-- 顶部导航栏 -->
+<div th:replace="~{/Blog/starter :: header}"></div>
+<!-- 内容主题 -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div id="preview">
+                <label for="Blog"></label>
+                <textarea id="Blog" style="display:none;">[[${blogDetail.blogContent}]]</textarea>
+                <script type="text/javascript">
+                    $(function () {
+                        editormd.markdownToHTML("preview", {});
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="text-muted">[[${blogDetail.blogTitle}]]</div>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-primary">创建时间：[[${#dates.format(blogDetail.blogCreateTime, 'yyyy-MM-dd HH:mm')}]]</div>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-warning">更新时间：[[${#dates.format(blogDetail.blogModifyTime, 'yyyy-MM-dd HH:mm')}]]</div>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-success">关键词：[[${blogDetail.blogKeyword}]]</div>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-danger">作者：[[${author}]]</div>
+                </div>
+                <div class="panel-footer">
+                    <div class="text-muted">摘要：[[${blogDetail.blogSummary}]]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 底部署名栏 -->
+<div th:replace="~{/Blog/starter :: footer}"></div>
+</body>
+</html>

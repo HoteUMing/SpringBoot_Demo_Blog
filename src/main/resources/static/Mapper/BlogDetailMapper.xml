@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Blog.Dao.BlogDetailMapper">
+
+    <!-- 查询所有文章 -->
+    <select id="blogFindAll" resultType="Blog.entity.BlogDetail">
+        SELECT * FROM BlogList
+    </select>
+
+    <!-- 查询指定用户所有文章 -->
+    <select id="userBlogFindAll" parameterType="INT" resultType="Blog.entity.BlogDetail">
+		select * from BlogList where userID=#{占位符}
+	</select>
+
+    <!-- 查询指定文章 -->
+    <select id="blogFindOne" parameterType="INT" resultType="Blog.entity.BlogDetail">
+		select * from BlogList where blogID=#{占位符};
+	</select>
+
+    <!-- 新增文章 -->
+    <insert id="blogInsert" parameterType="Blog.entity.BlogDetail">
+        INSERT INTO BlogList(blogTitle,blogKeyword,blogSummary,blogContent,blogCreateTime,blogModifyTime,userID) values(#{blogTitle},#{blogKeyword},#{blogSummary},#{blogContent},#{blogCreateTime},#{blogModifyTime},#{userID});
+    </insert>
+
+    <!-- 更新指定文章 -->
+    <update id="blogUpdate" parameterType="Blog.entity.BlogDetail">
+        update BlogList set blogTitle=#{blogTitle},blogKeyword=#{blogKeyword},blogSummary=#{blogSummary},blogContent=#{blogContent},blogModifyTime=#{blogModifyTime} where blogID=#{blogID};
+    </update>
+
+    <!-- 删除指定文章 -->
+    <delete id="blogDelete" parameterType="Integer">
+        delete from BlogList where blogID=#{占位符};
+    </delete>
+
+</mapper>

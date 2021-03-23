@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/Blog/starter :: cite}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="background1">
+<!-- 顶部导航栏 -->
+<div th:replace="~{/Blog/starter :: header}"></div>
+<!-- 内容主题 -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 bodyBackground">
+            <form action="/Blog/publish" method="post">
+                <div class="form-group">
+                    <label for="blogTitle">标题</label>
+                    <input type="text" class="form-control" id="blogTitle" name="blogTitle" placeholder="请输入标题...">
+                </div>
+                <div class="form-group">
+                    <label for="blogKeyword">关键词</label>
+                    <input type="text" class="form-control" id="blogKeyword" name="blogKeyword"
+                           placeholder="请补充关键词，并以逗号分隔...">
+                </div>
+                <div class="form-group">
+                    <label for="blogSummary">摘要</label>
+                    <textarea class="form-control" id="blogSummary" name="blogSummary"
+                              placeholder="请补充摘要..." rows="5"></textarea>
+                </div>
+                <label for="blogContent">内容</label>
+                <div class="form-group" id="editor">
+                    <textarea class="form-control" id="blogContent" name="blogContent" style="display:none;"></textarea>
+                    <script type="text/javascript">
+                        $(function () {
+                            editormd("editor", {
+                                height: 500,
+                                path: "/Markdown/lib/",
+                                placeholder: "请输入内容..."
+                            });
+                        });
+                    </script>
+                </div>
+                <button type="submit" class="btn btn-success pull-right" style="margin-bottom: 10px;">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-3 panel panel-default">
+            <ul class="list-group">
+                <li class="list-group-item panel-heading">
+                    <strong>Main Categories</strong>
+                </li>
+                <li class="list-group-item panel-body">
+                    <span class="badge">104</span>
+                    Technology
+                </li>
+                <li class="list-group-item panel-body">
+                    <span class="badge">34</span>
+                    Blogging
+                </li>
+                <li class="list-group-item panel-body">
+                    <span class="badge">10</span>
+                    Information
+                </li>
+                <li class="list-group-item panel-body">
+                    <span class="badge">50</span>
+                    Security
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 底部署名栏 -->
+<div th:replace="~{/Blog/starter :: footer}"></div>
+</body>
+</html>

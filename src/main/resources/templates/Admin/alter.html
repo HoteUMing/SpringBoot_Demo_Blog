@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/Admin/starter :: cite}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+<div class="wrapper">
+    <!-- 顶部导航栏 -->
+    <div th:replace="~{/Admin/starter :: header}"></div>
+    <!-- 侧边菜单栏 -->
+    <div th:replace="~{/Admin/starter :: sidebar}"></div>
+    <!-- 内容主题 -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                后台管理
+                <small>修改文章</small>
+            </h1>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <form th:action="@{/Admin/alter} + '/' + ${blogDetail.blogID}" method="post">
+                        <div class="form-group">
+                            <label for="blogTitle">标题</label>
+                            <input type="text" class="form-control" id="blogTitle" name="blogTitle"
+                                   th:value="${blogDetail.blogTitle}">
+                        </div>
+                        <div class="form-group">
+                            <label for="blogKeyword">关键词</label>
+                            <input type="text" class="form-control" id="blogKeyword" name="blogKeyword"
+                                   th:value="${blogDetail.blogKeyword}">
+                        </div>
+                        <div class="form-group">
+                            <label for="blogSummary">摘要</label>
+                            <textarea class="form-control" id="blogSummary" name="blogSummary" rows="5"
+                                      th:text="${blogDetail.blogSummary}"></textarea>
+                        </div>
+                        <label for="blogContent">内容</label>
+                        <div class="form-group" id="editor">
+                    <textarea class="form-control" id="blogContent" name="blogContent" style="display:none;"
+                              th:text="${blogDetail.blogContent}"></textarea>
+                            <script type="text/javascript">
+                                $(function () {
+                                    editormd("editor", {
+                                        height: 500,
+                                        path: "/Markdown/lib/",
+                                        placeholder: "请输入内容..."
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <button type="submit" class="btn btn-success" style="margin-bottom: 10px;">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- 底部署名栏 -->
+    <div th:replace="~{/Admin/starter :: footer}"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/Admin/starter :: cite}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+<div class="wrapper">
+    <!-- 顶部导航栏 -->
+    <div th:replace="~{/Admin/starter :: header}"></div>
+    <!-- 侧边菜单栏 -->
+    <div th:replace="~{/Admin/starter :: sidebar}"></div>
+    <!-- 内容主题 -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                后台管理
+                <small>我的文章</small>
+            </h1>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="timeline">
+                        <li th:if="${pageInfo}" th:each="BlogDetail : ${pageInfo.list}">
+                            <i class="fa fa-envelope bg-blue"></i>
+                            <div class="timeline-item">
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">[[${BlogDetail.blogTitle}]]</h3>
+                                        <span class="label label-success">[[${BlogDetail.blogKeyword}]]</span>
+                                        <span class="time">
+                                            <i class="fa fa-clock-o"></i>
+                                            [[${#dates.format(BlogDetail.blogModifyTime, 'yyyy-MM-dd HH:mm')}]]
+                                        </span>
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="box-header with-border">摘要：[[${BlogDetail.blogSummary}]]</div>
+                                    <div class="box-body">
+                                        <div th:id="preview + ${BlogDetail.blogID}">
+                                            <label for="Blog"></label>
+                                            <textarea id="Blog"
+                                                      style="display:none;">[[${BlogDetail.blogContent}]]</textarea>
+                                            <script type="text/javascript">
+                                                $(function () {
+                                                    editormd.markdownToHTML("preview" + [[${BlogDetail.blogID}]], {});
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="box-footer clearfix">
+                                        <a th:href="@{/Admin/alter} + '/' + ${BlogDetail.blogID}" class="btn btn-sm btn-info btn-flat pull-left">修改文章</a>
+                                        <a th:href="@{/Admin/delete} + '/' + ${BlogDetail.blogID}" class="btn btn-sm btn-danger btn-flat pull-right">删除文章</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li th:unless="${pageInfo}">
+                            <i class="fa fa-envelope bg-blue"></i>
+                            <div class="timeline-item">
+                                <div class="box box-info collapsed-box">当前没有任何文章可操作</div>
+                            </div>
+                        </li>
+                        <li><i class="fa fa-clock-o bg-gray"></i></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- 底部署名栏 -->
+    <div th:replace="~{/Admin/starter :: footer}"></div>
+</div>
+</body>
+</html>

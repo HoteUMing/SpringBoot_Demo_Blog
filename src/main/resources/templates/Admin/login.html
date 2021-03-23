@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/Admin/starter :: cite}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <a class="login-logo" href="/">
+        <div>test<b>Blog</b></div>
+    </a>
+    <div class="login-box-body">
+        <p class="login-box-msg">登录后开始你的访问</p>
+        <form action="/userLogin" method="post">
+            <div class="form-group has-feedback">
+                <input name="userName" type="text" class="form-control" placeholder="请输入用户名...">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input name="userPassword" type="password" class="form-control" placeholder="请输入密码...">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <p th:if="${errorMessage}" class="login-box-msg" th:text="${errorMessage}">错误信息</p>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+                </div>
+            </div>
+        </form>
+        <div class="social-auth-links text-center">
+            <p>- OR -</p>
+            <a href="#" class="btn btn-block btn-social btn-twitter btn-flat">
+                <i class="fa fa-qq"></i>使用QQ快捷登录
+            </a>
+        </div>
+        <div class="social-auth-links text-center" style="margin-bottom: 20px;">
+            <a href="#" class="pull-left">忘记密码</a>
+            <a href="/userRegister" class="pull-right text-center">注册帐号</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

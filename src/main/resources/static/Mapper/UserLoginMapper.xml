@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Blog.Dao.UserLoginMapper">
+
+    <!-- 查询所有帐号密码 -->
+    <select id="userLoginFindAll" resultType="Blog.entity.UserLogin">
+        SELECT * FROM userLogin;
+    </select>
+
+    <!-- 查询指定帐号密码 -->
+    <select id="userLoginFindOne" parameterType="INT" resultType="Blog.entity.UserLogin">
+		select * from userLogin where userID=#{占位符};
+	</select>
+
+    <!-- 新增帐号密码 -->
+    <insert id="userLoginInsert" parameterType="Blog.entity.UserLogin">
+        insert into userLogin(userID,userPassword) values(#{userID},#{userPassword});
+    </insert>
+
+    <!-- 更新指定帐号的密码 -->
+    <update id="userLoginUpdate" parameterType="Blog.entity.UserLogin">
+        update userLogin set userPassword=#{userPassword} where userID=#{userID};
+    </update>
+
+    <!-- 删除指定帐号的密码 -->
+    <delete id="userLoginDelete" parameterType="Integer">
+        delete from userLogin where userID=#{占位符};
+    </delete>
+
+</mapper>
